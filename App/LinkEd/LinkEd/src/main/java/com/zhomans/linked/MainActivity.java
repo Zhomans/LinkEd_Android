@@ -103,7 +103,8 @@ public class MainActivity extends Activity {
                 }
             });
         }
-        else {id = ids.iterator().next().toString();
+        else {
+        id = ids.iterator().next().toString();
 
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
@@ -270,15 +271,16 @@ public class MainActivity extends Activity {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         id = arrayAdapter.getItem(selectedPosition);
                         ids.remove(id);
-                        dialog.dismiss();
                         getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                 .edit()
                                 .remove(PREF_USERNAME)
                                 .commit();
-                        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                                .edit()
-                                .putStringSet(PREF_USERNAME,ids)
-                                .commit();
+                        if (ids.size() != 0) {
+                            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                    .edit()
+                                    .putStringSet(PREF_USERNAME,ids)
+                                    .commit();
+                        }
                         dialog.dismiss();
                     }
                 });
