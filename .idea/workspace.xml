@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState />
+    </option>
+  </component>
   <component name="AndroidLayouts">
     <shared>
       <config />
@@ -87,7 +92,19 @@
       <file leaf-file-name="MyExpandableListAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MyExpandableListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="0" selection-start="967" selection-end="967" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="1635">
+            <state line="51" column="10" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1635">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="listrow_group.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/listrow_group.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="15" selection-start="633" selection-end="633" vertical-scroll-proportion="-6.206897" vertical-offset="0" max-vertical-offset="270">
               <folding />
             </state>
           </provider>
@@ -96,28 +113,40 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="187" column="67" selection-start="7764" selection-end="7764" vertical-scroll-proportion="0.6526316" vertical-offset="1805" max-vertical-offset="4935">
+            <state line="170" column="74" selection-start="6839" selection-end="6839" vertical-scroll-proportion="-4.1789474" vertical-offset="3845" max-vertical-offset="5010">
               <folding>
-                <element signature="e#9527#9546#0" expanded="true" />
-                <element signature="e#9599#9607#0" expanded="true" />
-                <element signature="e#9748#9756#0" expanded="true" />
-                <element signature="e#9887#9895#0" expanded="true" />
-                <element signature="e#10011#10020#0" expanded="true" />
-                <element signature="e#10822#10830#0" expanded="true" />
-                <element signature="e#11178#11186#0" expanded="true" />
-                <element signature="e#11484#11753#0" expanded="true" />
-                <element signature="e#11726#11727#0" expanded="true" />
-                <element signature="e#11836#12164#0" expanded="true" />
-                <element signature="e#12137#12138#0" expanded="true" />
-                <element signature="e#12757#12956#0" expanded="true" />
-                <element signature="e#12937#12938#0" expanded="true" />
-                <element signature="e#13131#14261#0" expanded="true" />
-                <element signature="e#14242#14243#0" expanded="true" />
-                <element signature="e#14449#14718#0" expanded="true" />
-                <element signature="e#14691#14692#0" expanded="true" />
-                <element signature="e#14801#15134#0" expanded="true" />
-                <element signature="e#15107#15108#0" expanded="true" />
+                <element signature="e#9382#9401#0" expanded="true" />
+                <element signature="e#9454#9462#0" expanded="true" />
+                <element signature="e#9603#9611#0" expanded="true" />
+                <element signature="e#9742#9750#0" expanded="true" />
+                <element signature="e#9866#9875#0" expanded="true" />
+                <element signature="e#10677#10685#0" expanded="true" />
+                <element signature="e#11033#11041#0" expanded="true" />
+                <element signature="e#11339#11608#0" expanded="true" />
+                <element signature="e#11581#11582#0" expanded="true" />
+                <element signature="e#12273#12601#0" expanded="true" />
+                <element signature="e#12574#12575#0" expanded="true" />
+                <element signature="e#13194#13393#0" expanded="true" />
+                <element signature="e#13374#13375#0" expanded="true" />
+                <element signature="e#13568#14698#0" expanded="true" />
+                <element signature="e#14679#14680#0" expanded="true" />
+                <element signature="e#14886#15155#0" expanded="true" />
+                <element signature="e#15128#15129#0" expanded="true" />
+                <element signature="e#15238#15571#0" expanded="true" />
+                <element signature="e#15544#15545#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_main.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/activity_main.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="11" selection-start="848" selection-end="848" vertical-scroll-proportion="-9.310345" vertical-offset="0" max-vertical-offset="360">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -144,6 +173,8 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/menu/main.xml" />
+        <option value="$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/listrow_group.xml" />
         <option value="$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MainActivity.java" />
       </list>
     </option>
@@ -229,6 +260,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="LinkEd_Android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -404,6 +453,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.6706507" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3997344" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5003367" order="7" side_tool="true" content_ui="tabs" />
@@ -506,25 +556,25 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="168" column="0" selection-start="6859" selection-end="6859" vertical-scroll-proportion="0.0" vertical-offset="1920" max-vertical-offset="2940">
           <folding>
-            <element signature="e#9527#9546#0" expanded="true" />
-            <element signature="e#9599#9607#0" expanded="true" />
-            <element signature="e#9748#9756#0" expanded="true" />
-            <element signature="e#9887#9895#0" expanded="true" />
-            <element signature="e#10011#10020#0" expanded="true" />
-            <element signature="e#10822#10830#0" expanded="true" />
-            <element signature="e#11178#11186#0" expanded="true" />
-            <element signature="e#11484#11753#0" expanded="true" />
-            <element signature="e#11726#11727#0" expanded="true" />
-            <element signature="e#11836#12164#0" expanded="true" />
-            <element signature="e#12137#12138#0" expanded="true" />
-            <element signature="e#12757#12956#0" expanded="true" />
-            <element signature="e#12937#12938#0" expanded="true" />
-            <element signature="e#13131#14261#0" expanded="true" />
-            <element signature="e#14242#14243#0" expanded="true" />
-            <element signature="e#14449#14718#0" expanded="true" />
-            <element signature="e#14691#14692#0" expanded="true" />
-            <element signature="e#14801#15134#0" expanded="true" />
-            <element signature="e#15107#15108#0" expanded="true" />
+            <element signature="e#9382#9401#0" expanded="true" />
+            <element signature="e#9454#9462#0" expanded="true" />
+            <element signature="e#9603#9611#0" expanded="true" />
+            <element signature="e#9742#9750#0" expanded="true" />
+            <element signature="e#9866#9875#0" expanded="true" />
+            <element signature="e#10677#10685#0" expanded="true" />
+            <element signature="e#11033#11041#0" expanded="true" />
+            <element signature="e#11339#11608#0" expanded="true" />
+            <element signature="e#11581#11582#0" expanded="true" />
+            <element signature="e#12273#12601#0" expanded="true" />
+            <element signature="e#12574#12575#0" expanded="true" />
+            <element signature="e#13194#13393#0" expanded="true" />
+            <element signature="e#13374#13375#0" expanded="true" />
+            <element signature="e#13568#14698#0" expanded="true" />
+            <element signature="e#14679#14680#0" expanded="true" />
+            <element signature="e#14886#15155#0" expanded="true" />
+            <element signature="e#15128#15129#0" expanded="true" />
+            <element signature="e#15238#15571#0" expanded="true" />
+            <element signature="e#15544#15545#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -532,13 +582,6 @@
     <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/Group.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MyExpandableListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="0" selection-start="967" selection-end="967" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="1635">
           <folding />
         </state>
       </provider>
@@ -559,29 +602,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="11" selection-start="848" selection-end="848" vertical-scroll-proportion="-9.310345" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MyExpandableListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="10" selection-start="1656" selection-end="1656" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="1635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/res/layout/listrow_group.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="15" selection-start="633" selection-end="633" vertical-scroll-proportion="-6.206897" vertical-offset="0" max-vertical-offset="270">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App/LinkEd/LinkEd/src/main/java/com/zhomans/linked/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="67" selection-start="7764" selection-end="7764" vertical-scroll-proportion="0.6526316" vertical-offset="1805" max-vertical-offset="4935">
+        <state line="170" column="74" selection-start="6839" selection-end="6839" vertical-scroll-proportion="-4.1789474" vertical-offset="3845" max-vertical-offset="5010">
           <folding>
-            <element signature="e#9527#9546#0" expanded="true" />
-            <element signature="e#9599#9607#0" expanded="true" />
-            <element signature="e#9748#9756#0" expanded="true" />
-            <element signature="e#9887#9895#0" expanded="true" />
-            <element signature="e#10011#10020#0" expanded="true" />
-            <element signature="e#10822#10830#0" expanded="true" />
-            <element signature="e#11178#11186#0" expanded="true" />
-            <element signature="e#11484#11753#0" expanded="true" />
-            <element signature="e#11726#11727#0" expanded="true" />
-            <element signature="e#11836#12164#0" expanded="true" />
-            <element signature="e#12137#12138#0" expanded="true" />
-            <element signature="e#12757#12956#0" expanded="true" />
-            <element signature="e#12937#12938#0" expanded="true" />
-            <element signature="e#13131#14261#0" expanded="true" />
-            <element signature="e#14242#14243#0" expanded="true" />
-            <element signature="e#14449#14718#0" expanded="true" />
-            <element signature="e#14691#14692#0" expanded="true" />
-            <element signature="e#14801#15134#0" expanded="true" />
-            <element signature="e#15107#15108#0" expanded="true" />
+            <element signature="e#9382#9401#0" expanded="true" />
+            <element signature="e#9454#9462#0" expanded="true" />
+            <element signature="e#9603#9611#0" expanded="true" />
+            <element signature="e#9742#9750#0" expanded="true" />
+            <element signature="e#9866#9875#0" expanded="true" />
+            <element signature="e#10677#10685#0" expanded="true" />
+            <element signature="e#11033#11041#0" expanded="true" />
+            <element signature="e#11339#11608#0" expanded="true" />
+            <element signature="e#11581#11582#0" expanded="true" />
+            <element signature="e#12273#12601#0" expanded="true" />
+            <element signature="e#12574#12575#0" expanded="true" />
+            <element signature="e#13194#13393#0" expanded="true" />
+            <element signature="e#13374#13375#0" expanded="true" />
+            <element signature="e#13568#14698#0" expanded="true" />
+            <element signature="e#14679#14680#0" expanded="true" />
+            <element signature="e#14886#15155#0" expanded="true" />
+            <element signature="e#15128#15129#0" expanded="true" />
+            <element signature="e#15238#15571#0" expanded="true" />
+            <element signature="e#15544#15545#0" expanded="true" />
           </folding>
         </state>
       </provider>

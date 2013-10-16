@@ -58,10 +58,6 @@ public class MainActivity extends Activity {
 
         SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
         Set<String> empty = new HashSet<String>();
-        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                .edit()
-                .remove(PREF_USERNAME)
-                .commit();
         final Set ids = pref.getStringSet(PREF_USERNAME, empty);
 
         if (ids == empty) {
@@ -108,7 +104,6 @@ public class MainActivity extends Activity {
         }
         else {id = ids.iterator().next().toString();
 
-//        createData();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
                 groups);
@@ -175,7 +170,7 @@ public class MainActivity extends Activity {
                             String section = sections.get(i);
                             JSONArray jArray = jObject.getJSONArray(section);
                             for (int j=0;j<jArray.length();j++){
-                                section_data.add(jArray.get(j).toString());
+                                section_data.add(jArray.getJSONObject(j).get("title").toString());
                             }
                             all_section_data.add(section_data);
                         }
@@ -193,7 +188,7 @@ public class MainActivity extends Activity {
                             } else if (section.equals("Science")) {
                                 icons.add(R.drawable.science_blue);
                             } else {
-                                icons.add(R.drawable.ic_launcher);
+                                icons.add(R.drawable.reading_blue);
                             }
                         }
 
@@ -281,6 +276,16 @@ public class MainActivity extends Activity {
                                 dialog.dismiss();
                             }
                         });
+
+//                builderSingle.setPositiveButton("Go", new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+//                        // Do something useful withe the position of the selected radio button
+//                        id = arrayAdapter.getItem(selectedPosition);
+//                        connect();
+//                    }
+//                });
 
                 builderSingle.setAdapter(arrayAdapter,
                         new DialogInterface.OnClickListener() {
