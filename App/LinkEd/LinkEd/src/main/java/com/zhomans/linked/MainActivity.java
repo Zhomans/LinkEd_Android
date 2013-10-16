@@ -181,7 +181,20 @@ public class MainActivity extends Activity {
                         }
                         ArrayList<Integer> icons = new ArrayList<Integer>();
                         for (int i=0;i<sections.size();i++){
-                            icons.add(R.drawable.ic_launcher);
+                            String section = sections.get(i);
+                            if (section.equals("Math") || section.equals("Mathematics")) {
+                                icons.add(R.drawable.math_blue);
+                            } else if (section.equals("Writing")) {
+                                icons.add(R.drawable.writing_blue);
+                            } else if (section.equals("Reading") || section.equals("English")) {
+                                icons.add(R.drawable.reading_blue);
+                            } else if (section.equals("History") || section.equals("Geography")) {
+                                icons.add(R.drawable.history_blue);
+                            } else if (section.equals("Science")) {
+                                icons.add(R.drawable.science_blue);
+                            } else {
+                                icons.add(R.drawable.ic_launcher);
+                            }
                         }
 
                         for (int j = 0; j < sections.size(); j++) {
