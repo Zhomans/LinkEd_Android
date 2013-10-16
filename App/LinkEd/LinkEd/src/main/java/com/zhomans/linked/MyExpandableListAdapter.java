@@ -48,13 +48,13 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
         text = (TextView) convertView.findViewById(R.id.textView1);
         text.setText(children);
-        convertView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(activity, children,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
+//        convertView.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(activity, children,
+//                        Toast.LENGTH_SHORT).show();
+//            }
+//        });
         return convertView;
     }
 
@@ -96,6 +96,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
         Group group = (Group) getGroup(groupPosition);
         ((CheckedTextView) convertView).setText(group.string);
+        ((CheckedTextView) convertView).setCompoundDrawablesWithIntrinsicBounds(0, 0, group.icon, 0);
         ((CheckedTextView) convertView).setChecked(isExpanded);
         return convertView;
     }
