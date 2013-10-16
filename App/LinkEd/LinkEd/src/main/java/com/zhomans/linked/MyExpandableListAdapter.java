@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckedTextView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import LinkEd.linked.R;
@@ -43,11 +44,14 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
                              boolean isLastChild, View convertView, ViewGroup parent) {
         final String children = (String) getChild(groupPosition, childPosition);
         TextView text = null;
+        ImageView image = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.listrow_details, null);
         }
         text = (TextView) convertView.findViewById(R.id.textView1);
+        image = (ImageView) convertView.findViewById(R.id.imageView1);
         text.setText(children);
+        image.setImageResource(R.drawable.default_blue);
 //        convertView.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

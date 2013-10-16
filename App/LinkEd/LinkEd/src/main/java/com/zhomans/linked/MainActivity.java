@@ -188,7 +188,7 @@ public class MainActivity extends Activity {
                             } else if (section.equals("Science")) {
                                 icons.add(R.drawable.science_blue);
                             } else {
-                                icons.add(R.drawable.reading_blue);
+                                icons.add(R.drawable.default_blue);
                             }
                         }
 
@@ -327,7 +327,11 @@ public class MainActivity extends Activity {
                             if (!value.toString().matches("")) {
                                 Integer int_value = Integer.parseInt(value.toString());
                                 id = int_value.toString();
-                                ids.add(int_value.toString());
+                                ids.add(id);
+                                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                        .edit()
+                                        .remove(PREF_USERNAME)
+                                        .commit();
                                 getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                         .edit()
                                         .putStringSet(PREF_USERNAME,ids)
