@@ -42,7 +42,7 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, final int childPosition,
                              boolean isLastChild, View convertView, ViewGroup parent) {
-        final String children = (String) getChild(groupPosition, childPosition);
+        final Child children = (Child) getChild(groupPosition, childPosition);
         TextView text = null;
         ImageView image = null;
         if (convertView == null) {
@@ -50,8 +50,8 @@ public class MyExpandableListAdapter extends BaseExpandableListAdapter {
         }
         text = (TextView) convertView.findViewById(R.id.textView1);
         image = (ImageView) convertView.findViewById(R.id.imageView1);
-        text.setText(children);
-        image.setImageResource(R.drawable.default_blue);
+        text.setText(children.string);
+        image.setImageResource(children.icon);
 //        convertView.setOnClickListener(new OnClickListener() {
 //            @Override
 //            public void onClick(View v) {

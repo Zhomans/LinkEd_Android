@@ -165,14 +165,24 @@ public class MainActivity extends Activity {
                             }
                         }
                         ArrayList<ArrayList<String>> all_section_data = new ArrayList<ArrayList<String>>();
+                        ArrayList<ArrayList<Integer>> all_section_icons = new ArrayList<ArrayList<Integer>>();
                         for (int i=0;i<sections.size();i++){
                             ArrayList<String> section_data = new ArrayList<String>();
+                            ArrayList<Integer> section_icons = new ArrayList<Integer>();
                             String section = sections.get(i);
                             JSONArray jArray = jObject.getJSONArray(section);
                             for (int j=0;j<jArray.length();j++){
                                 section_data.add(jArray.getJSONObject(j).get("title").toString());
+                                String type = jArray.getJSONObject(j).get("type").toString();
+                                if (type.equals("assignment")){
+                                    section_icons.add(R.drawable.history_blue);
+                                }
+                                else {
+                                    section_icons.add(R.drawable.reading_blue);
+                                }
                             }
                             all_section_data.add(section_data);
+                            all_section_icons.add(section_icons);
                         }
                         ArrayList<Integer> icons = new ArrayList<Integer>();
                         for (int i=0;i<sections.size();i++){
@@ -195,7 +205,8 @@ public class MainActivity extends Activity {
                         for (int j = 0; j < sections.size(); j++) {
                             Group group = new Group(sections.get(j),icons.get(j));
                             for (int i = 0; i < all_section_data.get(j).size(); i++) {
-                                group.children.add(all_section_data.get(j).get(i));
+                                Child child = new Child(all_section_data.get(j).get(i), all_section_icons.get(j).get(i));
+                                group.children.add(child);
                             }
                             data.append(j, group);
                         }
