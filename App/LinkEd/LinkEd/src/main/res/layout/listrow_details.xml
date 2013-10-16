@@ -15,7 +15,8 @@
             android:drawablePadding="5dp"
             android:gravity="center_vertical"
             android:text="@string/hello_world"
-            android:textSize="20sp">
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-light">
     </TextView>
 
 </LinearLayout> 
