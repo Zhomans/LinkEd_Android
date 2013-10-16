@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.Menu;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -23,14 +25,19 @@ import LinkEd.linked.R;
 import android.app.Activity;
 import android.util.SparseArray;
 
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
@@ -51,11 +58,15 @@ public class MainActivity extends Activity {
 
         SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
         Set<String> empty = new HashSet<String>();
+        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                .edit()
+                .remove(PREF_USERNAME)
+                .commit();
         final Set ids = pref.getStringSet(PREF_USERNAME, empty);
 
         if (ids == empty) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
+            alert.setIcon(R.drawable.ic_social_add_person);
             alert.setTitle("ID");
             alert.setMessage("Please enter an ID.");
 
@@ -79,12 +90,14 @@ public class MainActivity extends Activity {
                     try{
                         if (!value.toString().matches("")) {
                             Integer int_value = Integer.parseInt(value.toString());
+                            id = int_value.toString();
                             ids.add(int_value.toString());
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
                                     .putStringSet(PREF_USERNAME,ids)
                                     .commit();
                             wantToCloseDialog = true;
+                            connect();
                         }
                     }
                     catch (NumberFormatException e){}
@@ -93,8 +106,7 @@ public class MainActivity extends Activity {
                 }
             });
         }
-        id = ids.iterator().next().toString();
-
+        else {id = ids.iterator().next().toString();
 
 //        createData();
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
@@ -102,6 +114,11 @@ public class MainActivity extends Activity {
                 groups);
         listView.setAdapter(adapter);
 
+        connect();
+        }
+    }
+
+    public void connect() {
         new AsyncTask<Void, Void, SparseArray<Group>>() {
             HttpClient client = new DefaultHttpClient();
             HttpResponse response;
@@ -164,7 +181,20 @@ public class MainActivity extends Activity {
                         }
                         ArrayList<Integer> icons = new ArrayList<Integer>();
                         for (int i=0;i<sections.size();i++){
-                            icons.add(R.drawable.ic_launcher);
+                            String section = sections.get(i);
+                            if (section.equals("Math") || section.equals("Mathematics")) {
+                                icons.add(R.drawable.math_blue);
+                            } else if (section.equals("Writing")) {
+                                icons.add(R.drawable.writing_blue);
+                            } else if (section.equals("Reading") || section.equals("English")) {
+                                icons.add(R.drawable.reading_blue);
+                            } else if (section.equals("History") || section.equals("Geography")) {
+                                icons.add(R.drawable.history_blue);
+                            } else if (section.equals("Science")) {
+                                icons.add(R.drawable.science_blue);
+                            } else {
+                                icons.add(R.drawable.ic_launcher);
+                            }
                         }
 
                         for (int j = 0; j < sections.size(); j++) {
@@ -226,4 +256,114 @@ public class MainActivity extends Activity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
+        Set<String> empty = new HashSet<String>();
+        final Set ids = pref.getStringSet(PREF_USERNAME, empty);
+        AlertDialog.Builder builderSingle = new AlertDialog.Builder(
+                MainActivity.this);
+        builderSingle.setIcon(R.drawable.ic_social_group);
+        builderSingle.setTitle("Select An ID:");
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+                MainActivity.this,
+                android.R.layout.select_dialog_singlechoice);
+
+
+        switch (item.getItemId()) {
+            case R.id.action_change:
+                arrayAdapter.addAll(ids);
+                builderSingle.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                builderSingle.setAdapter(arrayAdapter,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                id = arrayAdapter.getItem(which);
+                                connect();
+                            }
+                        });
+                builderSingle.show();
+                break;
+
+            case R.id.action_add:
+                AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+                alert.setIcon(R.drawable.ic_social_add_person);
+                alert.setTitle("ID");
+                alert.setMessage("Please enter an ID.");
+
+                // Set an EditText view to get user input
+                final EditText input = new EditText(this);
+                alert.setView(input);
+                alert.setPositiveButton("Ok", null);
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Canceled.
+                    }
+                });
+                final AlertDialog dialog = alert.create();
+                dialog.show();
+
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Boolean wantToCloseDialog = false;
+                        Editable value = input.getText();
+                        try{
+                            if (!value.toString().matches("")) {
+                                Integer int_value = Integer.parseInt(value.toString());
+                                id = int_value.toString();
+                                ids.add(int_value.toString());
+                                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                        .edit()
+                                        .putStringSet(PREF_USERNAME,ids)
+                                        .commit();
+                                wantToCloseDialog = true;
+                                connect();
+                            }
+                        }
+                        catch (NumberFormatException e){}
+                        if(wantToCloseDialog)
+                            dialog.dismiss();
+                    }
+                });
+                break;
+
+            case R.id.action_delete:
+                arrayAdapter.addAll(ids);
+                builderSingle.setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                builderSingle.setAdapter(arrayAdapter,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                id = arrayAdapter.getItem(which);
+                                ids.remove(id);
+                            }
+                        });
+                builderSingle.show();
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
 }
