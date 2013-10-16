@@ -215,35 +215,6 @@ public class MainActivity extends Activity {
         }.execute();
     }
 
-    public void createData() {
-        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-        ArrayList<String> history = new ArrayList<String>();
-        history.add("Civil War");
-        history.add("WWII");
-        data.add(history);
-
-        ArrayList<String> math = new ArrayList<String>();
-        math.add("Trig");
-        math.add("Calc");
-        data.add(math);
-
-        ArrayList<String> sections = new ArrayList<String>();
-        sections.add("History");
-        sections.add("Math");
-
-        ArrayList<Integer> icons = new ArrayList<Integer>();
-        icons.add(R.drawable.history);
-        icons.add(R.drawable.math);
-
-        for (int j = 0; j < sections.size(); j++) {
-            Group group = new Group(sections.get(j),icons.get(j));
-            for (int i = 0; i < data.get(j).size(); i++) {
-                group.children.add(data.get(j).get(i));
-            }
-            groups.append(j, group);
-        }
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -277,15 +248,15 @@ public class MainActivity extends Activity {
                             }
                         });
 
-//                builderSingle.setPositiveButton("Go", new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
-//                        // Do something useful withe the position of the selected radio button
-//                        id = arrayAdapter.getItem(selectedPosition);
-//                        connect();
-//                    }
-//                });
+                builderSingle.setPositiveButton("Go", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                        // Do something useful withe the position of the selected radio button
+                        id = arrayAdapter.getItem(selectedPosition);
+                        connect();
+                    }
+                });
 
                 builderSingle.setAdapter(arrayAdapter,
                         new DialogInterface.OnClickListener() {
