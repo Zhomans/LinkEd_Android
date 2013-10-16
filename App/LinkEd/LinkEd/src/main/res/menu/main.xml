@@ -11,10 +11,4 @@
             android:showAsAction="always"
             android:icon="@drawable/ic_social_add_person"
             android:title="Refresh"/>
-    <item
-            android:id="@+id/action_delete"
-            android:orderInCategory="100"
-            android:showAsAction="always"
-            android:icon="@drawable/ic_social_group"
-            android:title="Refresh"/>
 </menu>

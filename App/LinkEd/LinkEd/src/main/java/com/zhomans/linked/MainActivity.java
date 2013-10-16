@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.DialogPreference;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.util.Log;
@@ -239,14 +240,37 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_change:
                 arrayAdapter.addAll(ids);
-                builderSingle.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
+                builderSingle.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                builderSingle.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
                         });
+
+                builderSingle.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
+                        id = arrayAdapter.getItem(selectedPosition);
+                        ids.remove(id);
+                        dialog.dismiss();
+                        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                .edit()
+                                .remove(PREF_USERNAME)
+                                .commit();
+                        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                .edit()
+                                .putStringSet(PREF_USERNAME,ids)
+                                .commit();
+                        dialog.dismiss();
+                    }
+                });
 
                 builderSingle.setPositiveButton("Go", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -257,16 +281,6 @@ public class MainActivity extends Activity {
                         connect();
                     }
                 });
-
-                builderSingle.setAdapter(arrayAdapter,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                id = arrayAdapter.getItem(which);
-                                connect();
-                            }
-                        });
                 builderSingle.show();
                 break;
 
@@ -316,29 +330,6 @@ public class MainActivity extends Activity {
                             dialog.dismiss();
                     }
                 });
-                break;
-
-            case R.id.action_delete:
-                arrayAdapter.addAll(ids);
-                builderSingle.setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-
-                builderSingle.setAdapter(arrayAdapter,
-                        new DialogInterface.OnClickListener() {
-
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                id = arrayAdapter.getItem(which);
-                                ids.remove(id);
-                            }
-                        });
-                builderSingle.show();
                 break;
             default:
                 break;
