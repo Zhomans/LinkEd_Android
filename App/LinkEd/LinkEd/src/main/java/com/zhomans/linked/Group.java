@@ -11,7 +11,7 @@ public class Group {
 
     public String string;
     public int icon;
-    public final List<String> children = new ArrayList<String>();
+    public final List<Child> children = new ArrayList<Child>();
 
     public Group(String string, int icon) {
         this.string = string;
