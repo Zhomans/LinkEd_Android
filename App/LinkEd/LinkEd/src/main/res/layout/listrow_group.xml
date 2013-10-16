@@ -11,4 +11,5 @@
                  android:textSize="24sp"
                  android:textAlignment="textEnd"
                  android:textStyle="bold"
-                 />
+                 android:fontFamily="sans-serif-light"/>
+
