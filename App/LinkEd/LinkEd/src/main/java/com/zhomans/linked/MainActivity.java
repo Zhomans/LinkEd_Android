@@ -177,10 +177,10 @@ public class MainActivity extends Activity {
                                 section_data.add(jArray.getJSONObject(j).get("title").toString());
                                 String type = jArray.getJSONObject(j).get("type").toString();
                                 if (type.equals("assignment")){
-                                    section_icons.add(R.drawable.history_blue);
+                                    section_icons.add(R.drawable.assignment_blue);
                                 }
                                 else {
-                                    section_icons.add(R.drawable.reading_blue);
+                                    section_icons.add(R.drawable.check_blue);
                                 }
                             }
                             all_section_data.add(section_data);
