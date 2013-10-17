@@ -270,8 +270,8 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         if (selectedPosition != -1) {
-                            id = arrayAdapter.getItem(selectedPosition);
-                            ids.remove(id);
+                            String removed_id = arrayAdapter.getItem(selectedPosition);
+                            ids.remove(removed_id);
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
                                     .remove(PREF_USERNAME)
@@ -281,6 +281,10 @@ public class MainActivity extends Activity {
                                         .edit()
                                         .putStringSet(PREF_USERNAME,ids)
                                         .commit();
+                                if (removed_id.equals(id)){
+                                    id = ids.iterator().next().toString();
+                                    connect();
+                                }
                             }
                             dialog.dismiss();
                         }
