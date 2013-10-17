@@ -60,7 +60,6 @@ public class MainActivity extends Activity {
 
         SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
         Set<String> empty = new HashSet<String>();
-
         final Set<String> ids = pref.getStringSet(PREF_USERNAME, empty);
 
         if (ids == empty) {
@@ -282,7 +281,10 @@ public class MainActivity extends Activity {
 
             protected void onPostExecute(String name){
 
-                ids.add(id.toString() + "," + "Undefined");
+                if (name == null) {
+                    name = "Undefined";
+                }
+                ids.add(id.toString() + "," + name);
                 getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                         .edit()
                         .remove(PREF_USERNAME)
