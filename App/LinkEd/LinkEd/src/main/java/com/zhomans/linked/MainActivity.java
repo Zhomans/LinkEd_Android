@@ -60,6 +60,7 @@ public class MainActivity extends Activity {
 
         SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
         Set<String> empty = new HashSet<String>();
+
         final Set<String> ids = pref.getStringSet(PREF_USERNAME, empty);
 
         if (ids == empty) {
@@ -281,7 +282,7 @@ public class MainActivity extends Activity {
 
             protected void onPostExecute(String name){
 
-                ids.add(id.toString() + "," + name);
+                ids.add(id.toString() + "," + "Undefined");
                 getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                         .edit()
                         .remove(PREF_USERNAME)
@@ -348,8 +349,8 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         if (selectedPosition != -1) {
-                            id = identifiers.get(selectedPosition) + "," + names.get(selectedPosition);
-                            ids.remove(id);
+                            String removed_id = identifiers.get(selectedPosition) + "," + names.get(selectedPosition);
+                            ids.remove(removed_id);
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
                                     .remove(PREF_USERNAME)
@@ -359,6 +360,10 @@ public class MainActivity extends Activity {
                                         .edit()
                                         .putStringSet(PREF_USERNAME,ids)
                                         .commit();
+                                if (removed_id.equals(id)){
+                                    id = ids.iterator().next().toString();
+                                    connect();
+                                }
                             }
                             dialog.dismiss();
                         }
