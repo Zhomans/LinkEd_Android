@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -52,6 +53,7 @@ public class MainActivity extends Activity {
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String PREF_USERNAME = "ids";
     public static String id = "";
+    public static String child_name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +159,8 @@ public class MainActivity extends Activity {
 
                         JSONObject raw = new JSONObject(result);
                         JSONObject jObject = raw.getJSONObject("classes");
-                        String child_name = raw.get("name").toString();
+                        child_name = raw.get("name").toString();
+
                         ArrayList<String> sections = new ArrayList<String>();
                         JSONArray names = jObject.names();
                         if (names != null) {
@@ -217,6 +220,8 @@ public class MainActivity extends Activity {
             }
 
             protected void onPostExecute(SparseArray<Group> all_data){
+                TextView childName = (TextView) findViewById(R.id.childName);
+                childName.setText(child_name);
                 MyExpandableListAdapter adapter = new MyExpandableListAdapter(MainActivity.this, all_data);
                 ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
                 listView.setAdapter(adapter);
