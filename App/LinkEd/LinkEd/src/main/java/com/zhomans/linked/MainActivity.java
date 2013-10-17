@@ -351,8 +351,8 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         if (selectedPosition != -1) {
-                            String removed_id = identifiers.get(selectedPosition) + "," + names.get(selectedPosition);
-                            ids.remove(removed_id);
+                            String removed_id = identifiers.get(selectedPosition).toString();
+                            ids.remove(removed_id + "," + names.get(selectedPosition));
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
                                     .remove(PREF_USERNAME)
