@@ -269,29 +269,34 @@ public class MainActivity extends Activity {
                 builderSingle.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
-                        id = arrayAdapter.getItem(selectedPosition);
-                        ids.remove(id);
-                        getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                                .edit()
-                                .remove(PREF_USERNAME)
-                                .commit();
-                        if (ids.size() != 0) {
+                        if (selectedPosition != -1) {
+                            id = arrayAdapter.getItem(selectedPosition);
+                            ids.remove(id);
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
-                                    .putStringSet(PREF_USERNAME,ids)
+                                    .remove(PREF_USERNAME)
                                     .commit();
+                            if (ids.size() != 0) {
+                                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                                        .edit()
+                                        .putStringSet(PREF_USERNAME,ids)
+                                        .commit();
+                            }
+                            dialog.dismiss();
                         }
-                        dialog.dismiss();
                     }
                 });
 
                 builderSingle.setPositiveButton("Go", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         // Do something useful withe the position of the selected radio button
-                        id = arrayAdapter.getItem(selectedPosition);
-                        connect();
+
+                        if (selectedPosition != -1) {
+                            id = arrayAdapter.getItem(selectedPosition);
+                            connect();
+                            dialog.dismiss();
+                        }
                     }
                 });
                 builderSingle.show();
