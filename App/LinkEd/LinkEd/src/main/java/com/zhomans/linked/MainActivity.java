@@ -281,7 +281,7 @@ public class MainActivity extends Activity {
 
             protected void onPostExecute(String name){
 
-                if (name == null) {
+                if (name == "") {
                     name = "Undefined";
                 }
                 ids.add(id.toString() + "," + name);
