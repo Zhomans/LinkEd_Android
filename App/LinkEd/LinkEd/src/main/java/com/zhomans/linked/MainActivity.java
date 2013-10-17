@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import LinkEd.linked.R;
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
 
         SharedPreferences pref = getSharedPreferences(PREFS_NAME,MODE_PRIVATE);
         Set<String> empty = new HashSet<String>();
-        final Set ids = pref.getStringSet(PREF_USERNAME, empty);
+        final Set<String> ids = pref.getStringSet(PREF_USERNAME, empty);
 
         if (ids == empty) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -88,13 +89,8 @@ public class MainActivity extends Activity {
                         if (!value.toString().matches("")) {
                             Integer int_value = Integer.parseInt(value.toString());
                             id = int_value.toString();
-                            ids.add(int_value.toString());
-                            getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                                    .edit()
-                                    .putStringSet(PREF_USERNAME,ids)
-                                    .commit();
+                            saveUser(id, ids);
                             wantToCloseDialog = true;
-                            connect();
                         }
                     }
                     catch (NumberFormatException e){}
@@ -104,7 +100,7 @@ public class MainActivity extends Activity {
             });
         }
         else {
-        id = ids.iterator().next().toString();
+        id = ids.iterator().next().toString().split(",")[0];
 
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.listView);
         MyExpandableListAdapter adapter = new MyExpandableListAdapter(this,
@@ -158,7 +154,10 @@ public class MainActivity extends Activity {
 
                 try {
                     if (!result.equals("")) {
-                        JSONObject jObject = new JSONObject(result);
+
+                        JSONObject raw = new JSONObject(result);
+                        JSONObject jObject = raw.getJSONObject("classes");
+                        String child_name = raw.get("name").toString();
                         ArrayList<String> sections = new ArrayList<String>();
                         JSONArray names = jObject.names();
                         if (names != null) {
@@ -228,6 +227,77 @@ public class MainActivity extends Activity {
         }.execute();
     }
 
+    public void saveUser (final String id, final Set ids) {
+        new AsyncTask<Void, Void, String>() {
+            HttpClient client = new DefaultHttpClient();
+            HttpResponse response;
+            InputStream inputStream = null;
+            String result = "";
+
+
+            @Override
+            protected void onPreExecute() {
+                HttpConnectionParams.setConnectionTimeout(client.getParams(), 10000);
+            }
+
+            protected String doInBackground(Void... voids) {
+                String name = "";
+
+                try {
+                    String website = "http://olin-linked.herokuapp.com/"+id;
+                    HttpGet all_tweets = new HttpGet(website);
+                    all_tweets.setHeader("Content-type","application/json");
+
+                    response = client.execute(all_tweets);
+                    response.getStatusLine().getStatusCode();
+                    HttpEntity entity = response.getEntity();
+
+                    inputStream = entity.getContent();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"),8);
+                    StringBuilder sb = new StringBuilder();
+
+                    String line;
+                    String nl = System.getProperty("line.separator");
+                    while ((line = reader.readLine())!= null){
+                        sb.append(line + nl);
+                    }
+                    result = sb.toString();
+                }
+                catch (Exception e) {e.printStackTrace(); Log.e("Server", "Cannot Establish Connection");
+                }
+                finally{
+                    try{if(inputStream != null)inputStream.close();}catch(Exception squish){}}
+
+                try {
+                    if (!result.equals("")) {
+
+                        JSONObject raw = new JSONObject(result);
+                        JSONObject jObject = raw.getJSONObject("classes");
+                        name = raw.get("name").toString();
+                    }
+                }catch (JSONException e){e.printStackTrace();}
+                return name;
+            }
+
+            protected void onPostExecute(String name){
+
+                ids.add(id.toString() + "," + name);
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit()
+                        .remove(PREF_USERNAME)
+                        .commit();
+                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+                        .edit()
+                        .putStringSet(PREF_USERNAME,ids)
+                        .commit();
+                connect();
+
+            }
+        }.execute();
+
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -251,7 +321,15 @@ public class MainActivity extends Activity {
 
         switch (item.getItemId()) {
             case R.id.action_change:
-                arrayAdapter.addAll(ids);
+                final ArrayList<String> identifiers = new ArrayList<String>();
+                final ArrayList<String> names = new ArrayList<String>();
+
+                for (Object obj: ids) {
+                    String s = obj.toString();
+                    identifiers.add(s.split(",")[0]);
+                    names.add(s.split(",")[1]);
+                }
+                arrayAdapter.addAll(names);
                 builderSingle.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener() {
 
                     @Override
@@ -270,7 +348,7 @@ public class MainActivity extends Activity {
                     public void onClick(DialogInterface dialog, int which) {
                         int selectedPosition = ((AlertDialog)dialog).getListView().getCheckedItemPosition();
                         if (selectedPosition != -1) {
-                            id = arrayAdapter.getItem(selectedPosition);
+                            id = identifiers.get(selectedPosition) + "," + names.get(selectedPosition);
                             ids.remove(id);
                             getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
                                     .edit()
@@ -293,7 +371,7 @@ public class MainActivity extends Activity {
                         // Do something useful withe the position of the selected radio button
 
                         if (selectedPosition != -1) {
-                            id = arrayAdapter.getItem(selectedPosition);
+                            id = identifiers.get(selectedPosition);
                             connect();
                             dialog.dismiss();
                         }
@@ -330,17 +408,8 @@ public class MainActivity extends Activity {
                             if (!value.toString().matches("")) {
                                 Integer int_value = Integer.parseInt(value.toString());
                                 id = int_value.toString();
-                                ids.add(id);
-                                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                                        .edit()
-                                        .remove(PREF_USERNAME)
-                                        .commit();
-                                getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-                                        .edit()
-                                        .putStringSet(PREF_USERNAME,ids)
-                                        .commit();
                                 wantToCloseDialog = true;
-                                connect();
+                                saveUser(id, ids);
                             }
                         }
                         catch (NumberFormatException e){}
